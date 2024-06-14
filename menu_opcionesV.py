@@ -1,4 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
+from amigos_potencialesV import Ui_amigos_potencialesV #handler clase Ui_amigos_potenciales
+from agregar_amigosV import Ui_agregar_amigosV #handler clase Ui_agregar_amigos
+from solicitudes_amistadV import Ui_solicitudes_amistadV #handler clase Ui_solicitudes_amistadV 
 
 class Ui_menu_opciones(object):
     def setupUi(self, menu_opciones):
@@ -70,6 +73,8 @@ class Ui_menu_opciones(object):
         self.btnSolicitudesAmistad.clicked.connect(self.solicitudes_amistad)
 
     def amigos_potenciales(self):
+        window = Ui_amigos_potencialesV()
+        window.exec()
         print("Amigos potenciales button clicked")
 
     def cerrar_sesion(self):
@@ -77,9 +82,13 @@ class Ui_menu_opciones(object):
         self.close()
 
     def agregar_amigos(self):
+        window = Ui_agregar_amigosV()
+        window.exec()
         print("Agregar amigos button clicked")
 
     def solicitudes_amistad(self):
+        window = Ui_solicitudes_amistadV()
+        window.exec()
         print("Solicitudes de amistad button clicked")
 
     def retranslateUi(self, menu_opciones):
@@ -96,4 +105,3 @@ class Ui_menu_opcionesV(QtWidgets.QDialog, Ui_menu_opciones):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-
