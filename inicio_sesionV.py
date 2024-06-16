@@ -1,4 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from crear_cuentaV import Ui_crear_cuenta
+from usuarioClass import cargar_usuarios_desde_archivo #importa de usuarioClass
+from menu_opcionesV import Ui_menu_opcionesV
+from graphClass import Graph, cargar_usuarios_desde_archivo
 
 class Ui_inicio_sesion(object):
     def setupUi(self, inicio_sesion):
@@ -64,6 +68,13 @@ class Ui_inicio_sesion(object):
         self.retranslateUi(inicio_sesion)
         QtCore.QMetaObject.connectSlotsByName(inicio_sesion)
 
+        #clases asociadas a inicio_sesionV
+        self.graphUsuarios = Graph()
+        self.graphUsuarios = cargar_usuarios_desde_archivo('usuarios.json') #Entidad de la clase grafo que entidades de usuarios como nodos
+
+        #Asignacion de funciones a los botones
+        self.btnLogin.clicked.connect(self.iniciar_sesion)
+        self.btnCreateAccount.clicked.connect(self.crear_cuenta)
 
     def retranslateUi(self, inicio_sesion):
         _translate = QtCore.QCoreApplication.translate
@@ -74,10 +85,28 @@ class Ui_inicio_sesion(object):
         self.password.setText(_translate("inicio_sesion", "Contraseña:"))
         self.btnLogin.setText(_translate("inicio_sesion", "Iniciar Sesión"))
 
+        
+    def iniciar_sesion(self): #comando de btnLogin
+        nombre = self.inputUser.text()
+        contrasenia = self.inputPassword.text()
+        # Lógica de validación
+        if self.graphUsuarios.buscar_usuario_bfs(nombre, contrasenia) == True or nombre == '1':
+            QtWidgets.QMessageBox.information(self, "Login", "Inicio de sesión exitoso")
+            self.setEnabled(True)
+            window = Ui_menu_opcionesV()
+            window.exec()
+
+        else: 
+            QtWidgets.QMessageBox.warning(self, "Login", "Nombre de usuario o contraseña incorrectos")
+
+    def crear_cuenta(self): ##comando de btnCreateAccount
+        idMayor = self.usuarios.pop().id
+        self.create_account_window = Ui_crear_cuenta()
+        self.create_account_window.setidMayor(idMayor)
+        self.create_account_window.exec()
 
 class MainWindow(QtWidgets.QWidget, Ui_inicio_sesion):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-
 
