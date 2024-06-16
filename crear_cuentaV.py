@@ -1,8 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from usuarioClass import Usuario, agregar_usuario_a_json
 
 class Ui_crear_cuenta(QtWidgets.QDialog):
-    #para añadir un id no existente
+    # para añadir un id no existente
     idMayor = 0
+    
     def __init__(self, parent=None):
         super(Ui_crear_cuenta, self).__init__(parent)
         self.setupUi(self)
@@ -77,7 +79,7 @@ class Ui_crear_cuenta(QtWidgets.QDialog):
         self.lblPeliculaFavorita.setGeometry(QtCore.QRect(60, 430, 241, 41))
         self.lblPeliculaFavorita.setStyleSheet("font: 700 16pt 'Inter';\n"
                                                "color: rgb(255, 255, 255);")
-        self.lblPeliculaFavorita.setObjectName("lblComidaFavorita_2")
+        self.lblPeliculaFavorita.setObjectName("lblPeliculaFavorita")
         
         self.lblLugarFavorito = QtWidgets.QLabel(self.centralwidget)
         self.lblLugarFavorito.setGeometry(QtCore.QRect(60, 510, 211, 41))
@@ -196,22 +198,61 @@ class Ui_crear_cuenta(QtWidgets.QDialog):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         
-        #Asignacion de funciones a los botones
+        # Asignación de funciones a los botones
         self.btnExit.clicked.connect(self.salir)
         self.btnCrearCuenta.clicked.connect(self.crear_cuenta)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-
     def salir(self):
-        QtWidgets.QMessageBox.information(self, "ALERTA", "Su progreso no sera guardado")
+        QtWidgets.QMessageBox.information(self, "ALERTA", "Su progreso no será guardado")
         self.reject()
 
     def crear_cuenta(self):
-        print("Cuenta creada")
-    
-    #setter idMayor
+        # Obtener valores de los inputs
+        nombre = self.inputNombre.text()
+        contrasenia = self.inputContrasenia.text()
+        comida_favorita = self.inputComidaFavorita.text()
+        pelicula_favorita = self.inputPeliculaFavorita.text()
+        lugar_favorito = self.inputLugarFavorito.text()
+        hobby = self.inputHobby.text()
+        fobia = self.inputFobia.text()
+        carrera = self.inputCarrera.text()
+        num_hermanos = self.inputNumHermanos.text()
+        tienes_novia = self.comboBox.currentText()
+        ciclo = self.inputCiclo.text()
+        ciudad_domicilio = self.inputCiudadDomicilio.text()
+        # Valida que ninguno de los campos esté vacío
+        if not all([nombre, contrasenia, comida_favorita, pelicula_favorita, lugar_favorito, hobby, fobia, carrera, num_hermanos, tienes_novia, ciclo, ciudad_domicilio]):
+            QtWidgets.QMessageBox.warning(self, "Advertencia", "Todos los campos deben estar llenos")
+            return
+        
+        amigos = []
+        # Crea nuevo usuario
+        nuevo_usuario = Usuario(
+            self.idMayor + 1,
+            nombre,
+            amigos,
+            contrasenia,
+            comida_favorita,
+            pelicula_favorita,
+            lugar_favorito,
+            hobby,
+            fobia,
+            num_hermanos,
+            carrera,
+            ciclo,
+            ciudad_domicilio,
+            tienes_novia
+        )
+        # Añadir usuario al archivo JSON
+        agregar_usuario_a_json(nuevo_usuario, 'usuarios.json')
+        
+        QtWidgets.QMessageBox.information(self, "Creación de cuenta", "Cuenta creada y almacenada en la base de datos")
+        self.accept()
+
+    # Setter idMayor
     def setidMayor(self, idMayor):
         self.idMayor = idMayor
 
@@ -235,5 +276,3 @@ class Ui_crear_cuenta(QtWidgets.QDialog):
         self.LblCiudadDomicilio.setText(_translate("Dialog", "Ciudad de Domicilio:"))
         self.comboBox.setItemText(0, _translate("Dialog", "Si"))
         self.comboBox.setItemText(1, _translate("Dialog", "No"))
-
-
