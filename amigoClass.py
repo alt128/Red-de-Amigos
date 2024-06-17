@@ -1,4 +1,4 @@
- class Amigo:
+class Amigo:
     def __init__(self, id, relacion):
         self.id = id
         self.relacion = relacion

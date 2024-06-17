@@ -2,7 +2,7 @@ import json
 from amigoClass import Amigo
 
 class Usuario:
-    def _init_(self, id, nombre, amigos, contrasenia, comida_favorita, pelicula_favorita, lugar_favorito, hobby, fobia, carrera, numero_hermanos, ciclo, donde_vive, tiene_novia):
+    def __init__(self, id, nombre, amigos, contrasenia, comida_favorita, pelicula_favorita, lugar_favorito, hobby, fobia, carrera, numero_hermanos, ciclo, donde_vive, tiene_novia):
         self.id = id
         self.nombre = nombre
         self.amigos = amigos
@@ -18,7 +18,7 @@ class Usuario:
         self.donde_vive = donde_vive
         self.tiene_novia = tiene_novia
 
-    def _repr_(self):
+    def __repr__(self):
         return (f"Usuario(id={self.id}, nombre='{self.nombre}', amigos={self.amigos}, "
                 f"contrasenia='{self.contrasenia}', comida_favorita='{self.comida_favorita}', "
                 f"pelicula_favorita='{self.pelicula_favorita}', lugar_favorito='{self.lugar_favorito}', "
@@ -55,4 +55,4 @@ def agregar_usuario_a_json(usuario, filename):
         # Volver al inicio del archivo y escribir los datos actualizados
         file.seek(0)
         json.dump(json_data, file, ensure_ascii=False, indent=4)
-        file.truncate()
+        file.truncate()

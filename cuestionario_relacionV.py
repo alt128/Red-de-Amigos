@@ -1,3 +1,4 @@
+import sys
 from PyQt5 import QtWidgets, QtCore
 
 class Ui_cuestionario_relacion(object):
@@ -160,6 +161,12 @@ class Ui_cuestionario_relacion(object):
         self.close()
 
 class Ui_cuestionario_relacionV(QtWidgets.QDialog, Ui_cuestionario_relacion):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.setupUi(self)
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    window = Ui_cuestionario_relacionV()
+    window.show()
+    sys.exit(app.exec_())

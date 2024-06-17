@@ -1,6 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from crear_cuentaV import Ui_crear_cuenta
-from usuarioClass import cargar_usuarios_desde_archivo #importa de usuarioClass
 from menu_opcionesV import Ui_menu_opcionesV
 from graphClass import Graph, cargar_usuarios_desde_archivo
 
@@ -100,7 +99,7 @@ class Ui_inicio_sesion(object):
             QtWidgets.QMessageBox.warning(self, "Login", "Nombre de usuario o contraseña incorrectos")
 
     def crear_cuenta(self): ##comando de btnCreateAccount
-        idMayor = self.usuarios.pop().id
+        idMayor = 1500
         self.create_account_window = Ui_crear_cuenta()
         self.create_account_window.setidMayor(idMayor)
         self.create_account_window.exec()
