@@ -2,9 +2,13 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from amigos_potencialesV import Ui_amigos_potencialesV #handler clase Ui_amigos_potenciales
 from agregar_amigosV import Ui_agregar_amigosV #handler clase Ui_agregar_amigos
 from solicitudes_amistadV import Ui_solicitudes_amistadV #handler clase Ui_solicitudes_amistadV 
+from usuarioClass import Usuario
+from graphClass import Graph
+
 
 class Ui_menu_opciones(object):
     def setupUi(self, menu_opciones):
+        #atributos de estilo
         menu_opciones.setObjectName("Menu opciones")
         menu_opciones.resize(1300, 800)
         menu_opciones.setEnabled(True)
@@ -47,7 +51,7 @@ class Ui_menu_opciones(object):
         self.btnSolicitudesAmistad.setObjectName("btnSolicitudesAmistad")
 
         self.lblGrafoAmigos = QtWidgets.QLabel(menu_opciones)
-        self.lblGrafoAmigos.setGeometry(QtCore.QRect(820, 120, 151, 31))
+        self.lblGrafoAmigos.setGeometry(QtCore.QRect(790, 120, 300, 31))
         self.lblGrafoAmigos.setStyleSheet("font: 200 12pt \"Manrope\";\ncolor: rgb(255, 255, 255);")
         self.lblGrafoAmigos.setObjectName("lblGrafoAmigos")
 
@@ -65,6 +69,9 @@ class Ui_menu_opciones(object):
 
         self.retranslateUi(menu_opciones)
         QtCore.QMetaObject.connectSlotsByName(menu_opciones)
+        #atributos funcionales
+        self.usuarioLogueado = Usuario( 101,"Juan Pérez",[],"password123","Pizza", "Inception","Playa","Leer","Alturas","Ingeniería en Sistemas",2,5,"Ciudad de México","Si",[])
+        self.graphUsuarios = Graph()
         
         #Asignacion de funciones a los botones
         self.btnAmigosPotenciales.clicked.connect(self.amigos_potenciales)
@@ -72,28 +79,53 @@ class Ui_menu_opciones(object):
         self.btnAgregarAmigos.clicked.connect(self.agregar_amigos)
         self.btnSolicitudesAmistad.clicked.connect(self.solicitudes_amistad)
 
+    def setUsuarioLogueado(self, usuario):
+        self.usuarioLogueado = usuario
+        print(self.usuarioLogueado.nombre)
+
+    def setGraphUsuarios(self, graph):
+        self.graphUsuarios = graph
+
+    def getNombreUsuarioLogueado(self):
+        return self.usuarioLogueado.getNombre()
+    
+    def generar_grafo_amigos(self):
+        self.graphUsuarios.dibujar(self.frame)
+        
+        #grafo_amigos = Graph()
+        # Agregar el usuario logueado al grafo
+        #grafo_amigos.nodo(str(self.usuarioLogueado.nombre), str(self.usuarioLogueado.nombre))
+
+        # Agregar los amigos del usuario logueado al grafo
+        #for amigo in self.usuarioLogueado.amigos:
+            #grafo_amigos.nodo(str(amigo.id), str(amigo.id))
+            # Agregar la arista entre el usuario logueado y el amigo
+            #grafo_amigos.aniadir_arista(str(self.usuarioLogueado.nombre), str(amigo.id), str(amigo.relacion))  # Asumiendo peso 1 para todas las aristas
+
+        #grafo_amigos.dibujar(self.frame)
+        
     def amigos_potenciales(self):
         window = Ui_amigos_potencialesV()
         window.exec()
-        print("Amigos potenciales button clicked")
+        print("Amigos potenciales clickeado")
 
     def cerrar_sesion(self):
-        print("Cerrar sesión button clicked")
+        print("Cerrar sesión clickeado")
         self.close()
 
     def agregar_amigos(self):
         window = Ui_agregar_amigosV()
         window.exec()
-        print("Agregar amigos button clicked")
+        print("Agregar amigos clickeado")
 
     def solicitudes_amistad(self):
         window = Ui_solicitudes_amistadV()
         window.exec()
-        print("Solicitudes de amistad button clicked")
+        print("Solicitudes de amistad clickeado")
 
     def retranslateUi(self, menu_opciones):
         _translate = QtCore.QCoreApplication.translate
-        menu_opciones.setWindowTitle(_translate("menu_opciones", "InicioSesion"))
+        menu_opciones.setWindowTitle(_translate("menu_opciones", "Menu opciones"))
         self.btnAmigosPotenciales.setText(_translate("menu_opciones", "Amigos potenciales"))
         self.titulo.setText(_translate("menu_opciones", "RED DE AMIGOS"))
         self.btnCerrarSesion.setText(_translate("menu_opciones", "Cerrar sesión"))
@@ -102,6 +134,6 @@ class Ui_menu_opciones(object):
         self.lblGrafoAmigos.setText(_translate("menu_opciones", "Grafo de amigos"))
 
 class Ui_menu_opcionesV(QtWidgets.QDialog, Ui_menu_opciones):
-    def __init__(self):
-        super().__init__()
+    def _init_(self):
+        super()._init_()
         self.setupUi(self)
