@@ -237,6 +237,21 @@ class Ui_cuestionario_relacion(object):
         return resultado_cuestionario
 
 
+    def modificar_solicitudes_amistad(self): # valido cuando cuestionario relacion se apertura desde agregar_amigosV
+        self.usuarioAmigo.agregar_solicitud_amistad(self.usuarioLogueado.id,self.usuarioLogueado.nombre, self.resultadoCuestionario() ,'usuarios.json')
+
+        QtWidgets.QMessageBox.information(self, "Aviso", "Solicitud de amistad enviada")
+        self.close()
+
+    def aceptar_solicitud_amistad(self): #valido cuando cuestionario relacion se apertura desde solicitudes_amistadV
+        resultado_cuestionario_usuario_actual = self.resultadoCuestionario()
+
+        valor_relacion = int((resultado_cuestionario_usuario_actual+self.resultadoCuestionarioUsuarioSolicitoAmistad)/2)
+        self.usuarioLogueado.eliminar_solicitud_amistad(self.usuarioAmigo.id, self.usuarioAmigo.nombre, self.resultadoCuestionarioUsuarioSolicitoAmistad, valor_relacion, 'usuarios.json')
+        QtWidgets.QMessageBox.information(self, "Cuestionario terminado", f"{self.usuarioAmigo.nombre} es tu amigo, y su relacion es de {valor_relacion} puntos")
+        self.close()
+
+
     def retranslateUi(self, cuestionario_relacion):
         _translate = QtCore.QCoreApplication.translate
         cuestionario_relacion.setWindowTitle(_translate("cuestionario_relacion", "Dialog"))
