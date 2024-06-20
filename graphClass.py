@@ -90,10 +90,41 @@ class Graph:
 
         return resultados
     
+    def camino_minimo_Dijkstra(self, usuario_logueado, criterio, valor, frame):
+        # Utilizar bfs_por_criterio_de_busqueda para obtener la lista de usuarios que cumplen con el criterio
+        usuarios_destino = self.bfs_por_criterio_de_busqueda(criterio, valor)
+
+        # Nodo inicial para Dijkstra es el usuario logueado
+        nodo_inicial = usuario_logueado
+
+        # Inicialización para Dijkstra
+        distancias = {usuario: float('inf') for usuario in self.Vertices}
+        distancias[nodo_inicial] = 0
+        cola_prioridad = [(0, nodo_inicial)]  # Tuplas de (distancia_acumulada, nodo)
+
+        # Estructuras para guardar los caminos mínimos
+        caminos_minimos = {usuario: [] for usuario in self.Vertices}
+        caminos_minimos[nodo_inicial] = [nodo_inicial]
+
+        # Algoritmo de Dijkstra
+        while cola_prioridad:
+            distancia_actual, u = heapq.heappop(cola_prioridad)
+
+            for v_idx, peso in self.G[self.label2v[u]]:
+                v = self.Vertices[v_idx]
+                distancia_nueva = distancia_actual + peso
+
+                if distancia_nueva < distancias[v]:
+                    distancias[v] = distancia_nueva
+                    heapq.heappush(cola_prioridad, (distancia_nueva, v))
+                    caminos_minimos[v] = caminos_minimos[u] + [v]
+
+        grafo_caminos_minimos = Graph()
+    
     def dibujar(self, frame):
         # Generate the graph layout and draw it using Matplotlib
         pos = nx.spring_layout(self.Gnx)
-        plt.figure(figsize=(50, 130))
+        plt.figure(figsize=(150, 130))
         nx.draw(self.Gnx, pos, with_labels=True, node_size=700, font_size=10)
         edge_labels = nx.get_edge_attributes(self.Gnx, 'weight')
         nx.draw_networkx_edge_labels(self.Gnx, pos, edge_labels=edge_labels)
