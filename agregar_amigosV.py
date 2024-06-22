@@ -1,4 +1,8 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtWidgets import QLabel, QVBoxLayout
+from graphClass import Graph
+from usuarioClass import Usuario
+from cuestionario_relacionV import Ui_cuestionario_relacionV
 
 class Ui_agregar_amigos(object):
     def setupUi(self, agregar_amigos):
@@ -27,11 +31,6 @@ class Ui_agregar_amigos(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         
-        self.lblEncontrado = QtWidgets.QLabel(self.frame)
-        self.lblEncontrado.setGeometry(QtCore.QRect(90, 240, 211, 31))
-        self.lblEncontrado.setStyleSheet("font: 500 14pt \"Manrope\";\n" "color: rgb(255, 255, 255);")
-        self.lblEncontrado.setObjectName("lblEncontrado")
-        self.lblEncontrado.setEnabled(False)
         
         self.btnBuscar = QtWidgets.QPushButton(agregar_amigos)
         self.btnBuscar.setGeometry(QtCore.QRect(960, 160, 101, 35))
@@ -50,6 +49,7 @@ class Ui_agregar_amigos(object):
         self.btnEnviarSolicitud.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btnEnviarSolicitud.setStyleSheet("background-color: rgb(19, 44, 74);\n" "font: 12pt \"Inter\";\n" "color: rgb(255, 255, 255);\n" "border-color: rgb(10, 125, 208);")
         self.btnEnviarSolicitud.setObjectName("btnEnviarSolicitud")
+        self.btnEnviarSolicitud.setEnabled(False)
         
         self.inputNombre = QtWidgets.QLineEdit(agregar_amigos)
         self.inputNombre.setGeometry(QtCore.QRect(410, 160, 460, 41))
@@ -67,14 +67,57 @@ class Ui_agregar_amigos(object):
 
         #Asignacion de funciones a los botones
         self.btnExit.clicked.connect(self.cerrar_ventana)
+        self.btnBuscar.clicked.connect(self.buscar_amigo)
+        self.btnEnviarSolicitud.clicked.connect(self.cuestionario_relacion_amigo)
+
+        #atributos funcionales
+        self.usuarioLogueado = Usuario( 101,"Juan Pérez",[],"password123","Pizza", "Inception","Playa","Leer","Alturas","Ingeniería en Sistemas",2,5,"Ciudad de México","Si",[])
+        self.graphUsuarios = Graph()
+        self.usuarioAmigo = Usuario( 101,"Juan Pérez",[],"password123","Pizza", "Inception","Playa","Leer","Alturas","Ingeniería en Sistemas",2,5,"Ciudad de México","Si",[])
+
+    #metodos
+    def setUsuarioLogueado(self, usuario):
+        self.usuarioLogueado = usuario
+
+    def setGraphUsuarios(self, graph):
+        self.graphUsuarios = graph
+        
+    def buscar_amigo(self):
+        nombre = self.inputNombre.text()
+        self.usuarioAmigo = self.graphUsuarios.buscar_usuario_bfs(nombre)
+        if isinstance(self.usuarioAmigo, Usuario):
+            self.btnEnviarSolicitud.setEnabled(True) #activa el boton Enviar Solicitud
+            label = QLabel()
+
+            image_path = "user.png"
+            pixmap = QtGui.QPixmap(image_path)
+            label.setPixmap(pixmap)
+            label.resize(pixmap.width(), pixmap.height())
+            
+            layout = QVBoxLayout()
+            layout.addWidget(label)
+            self.frame.setLayout(layout)
+        else:
+            QtWidgets.QMessageBox.information(self, "Aviso", "Usuario no encontrado")
     
+    def cuestionario_relacion_amigo(self):
+        #eliminar la imagen del frame
+        label = self.frame.findChild(QLabel)
+        label.clear()
+        self.frame.layout().deleteLater()
+        window = Ui_cuestionario_relacionV()
+        window.setPuerta(True)
+        window.setUsuarioLogueado(self.usuarioLogueado)
+        window.setUsuarioAmigo(self.usuarioAmigo)
+        window.setearComboBoxes()
+        window.exec()
+
     def retranslateUi(self, agregar_amigos):
         _translate = QtCore.QCoreApplication.translate
         agregar_amigos.setWindowTitle(_translate("agregar_amigos", "Agregar amigos"))
         self.btnExit.setText(_translate("agregar_amigos", "<-"))
         self.lblNombre.setText(_translate("agregar_amigos", "Nombre:"))
         self.titulo.setText(_translate("agregar_amigos", "AGREGAR AMIGOS"))
-        self.lblEncontrado.setText(_translate("agregar_amigos", "NO ENCONTRADO"))
         self.btnBuscar.setText(_translate("agregar_amigos", "Buscar"))
         self.btnEnviarSolicitud.setText(_translate("agregar_amigos", "Enviar solicitud"))
     
@@ -83,7 +126,6 @@ class Ui_agregar_amigos(object):
         self.close()
 
 class Ui_agregar_amigosV(QtWidgets.QDialog, Ui_agregar_amigos):
-    def __init__(self):
-        super().__init__()
+    def _init_(self):
+        super()._init_()
         self.setupUi(self)
-
