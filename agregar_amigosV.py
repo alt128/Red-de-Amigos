@@ -89,8 +89,8 @@ class Ui_agregar_amigos(object):
             self.btnEnviarSolicitud.setEnabled(True) #activa el boton Enviar Solicitud
             label = QLabel()
 
-            image_path = "user.png"
-            pixmap = QtGui.QPixmap(image_path)
+            imagen_url = "usuario.png"
+            pixmap = QtGui.QPixmap(imagen_url)
             label.setPixmap(pixmap)
             label.resize(pixmap.width(), pixmap.height())
             
