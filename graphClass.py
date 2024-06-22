@@ -1,13 +1,11 @@
 import json
 import networkx as nx
-import matplotlib.pyplot as plt
-from io import BytesIO
-from PyQt5.QtWidgets import QGraphicsScene, QGraphicsView, QGraphicsPixmapItem, QApplication
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap
 from usuarioClass import Usuario
 from amigoClass import Amigo
-import heapq #en dijkstra
+import heapq
+import math
 
 class Graph:
     def __init__(self):
@@ -21,11 +19,7 @@ class Graph:
         self.label2v[etiqueta] = len(self.Vertices)
         self.Vertices.append(usuario)
         self.G.append([])  # Inicializar lista de adyacencia vacía para el nuevo nodo
-        self.Gnx.add_node(usuario.nombre) #etiqueta vertice grafo networkx
-
-    def nodos(self, etiquetas):
-        for etiqueta in etiquetas:
-            self.nodo(etiqueta, etiqueta)  # Crear nodos con etiquetas iguales a los nombres
+        self.Gnx.add_node(len(self.Vertices) - 1)  # Usar el índice del nodo como identificador
 
     def arista(self, u, v, peso):
         u_idx = self.label2v[u]
@@ -34,7 +28,11 @@ class Graph:
             self.G[u_idx].append((v_idx, peso))
             self.G[v_idx].append((u_idx, peso))  # Agregar la arista en ambos sentidos
             self.edges_set.add((u_idx, v_idx))  # Registrar la arista
-            self.Gnx.add_edge(self.Vertices[u_idx].nombre, self.Vertices[v_idx].nombre, weight=peso) #se solicita el atributo nombre de la clase Usuario
+            self.Gnx.add_edge(u_idx, v_idx, weight=peso)
+
+    def nodos(self, etiquetas):
+        for etiqueta in etiquetas:
+            self.nodo(etiqueta, etiqueta)  # Crear nodos con etiquetas iguales a los nombres
 
     def aristas(self, u, vs):
         for v, peso in vs:
@@ -79,8 +77,12 @@ class Graph:
             usuario = self.Vertices[u]  # Obtener el usuario correspondiente al nodo
 
             # Verificar si el usuario cumple con el criterio de búsqueda
-            if isinstance(usuario, Usuario) and getattr(usuario, criterio, None) == valor:
-                resultados.append(usuario)  # Agregar el usuario a la lista de resultados
+            if criterio != 'numero_hermanos':
+                if getattr(usuario, criterio, None) == valor:
+                    resultados.append(usuario)  # Agregar el usuario a la lista de resultados
+            else: 
+                if getattr(usuario, criterio, None) == int(valor):
+                    resultados.append(usuario)
 
             # Agregar todos los vecinos no visitados del usuario actual a la cola y marcarlos como visitados
             for v_idx, _ in self.G[u]:
@@ -89,68 +91,76 @@ class Graph:
                     queue.append(v_idx)
 
         return resultados
-    
-    def camino_minimo_Dijkstra(self, usuario_logueado, criterio, valor, frame):
-        # Utilizar bfs_por_criterio_de_busqueda para obtener la lista de usuarios que cumplen con el criterio
+        
+
+
+
+
+    def camino_minimo_Dijkstra(self, usuario_logueado, criterio, valor):
+        # Step 1: Perform Dijkstra's algorithm to find shortest paths
         usuarios_destino = self.bfs_por_criterio_de_busqueda(criterio, valor)
+        usuario_inicio = None
+        for i, usuario in enumerate(self.Vertices):
+            if isinstance(usuario, Usuario) and usuario.nombre == usuario_logueado.nombre:
+                usuario_inicio = i
+                break
+        if usuario_inicio is None:
+            return "Usuario logueado no encontrado en el grafo."
 
-        # Nodo inicial para Dijkstra es el usuario logueado
-        nodo_inicial = usuario_logueado
+        n = len(self.G)
+        visitado = [False] * n
+        camino = [None] * n
+        costo = [math.inf] * n
+        costo[usuario_inicio] = 0
+        cola_prioridad = [(0, usuario_inicio)]
 
-        # Inicialización para Dijkstra
-        distancias = {usuario: float('inf') for usuario in self.Vertices}
-        distancias[nodo_inicial] = 0
-        cola_prioridad = [(0, nodo_inicial)]  # Tuplas de (distancia_acumulada, nodo)
-
-        # Estructuras para guardar los caminos mínimos
-        caminos_minimos = {usuario: [] for usuario in self.Vertices}
-        caminos_minimos[nodo_inicial] = [nodo_inicial]
-
-        # Algoritmo de Dijkstra
         while cola_prioridad:
-            distancia_actual, u = heapq.heappop(cola_prioridad)
+            g_u, u = heapq.heappop(cola_prioridad)
+            if not visitado[u]:
+                visitado[u] = True
+                for v, w in self.G[u]:
+                    f = g_u + w
+                    if f < costo[v]:
+                        costo[v] = f
+                        camino[v] = u
+                        heapq.heappush(cola_prioridad, (f, v))
 
-            for v_idx, peso in self.G[self.label2v[u]]:
-                v = self.Vertices[v_idx]
-                distancia_nueva = distancia_actual + peso
+        # Step 2: Create a subgraph containing all nodes involved in shortest paths
+        subgrafo = Graph()
 
-                if distancia_nueva < distancias[v]:
-                    distancias[v] = distancia_nueva
-                    heapq.heappush(cola_prioridad, (distancia_nueva, v))
-                    caminos_minimos[v] = caminos_minimos[u] + [v]
+        # Add starting node to the subgraph
+        subgrafo.nodo(self.Vertices[usuario_inicio].id, self.Vertices[usuario_inicio])
 
-        grafo_caminos_minimos = Graph()
-    
-    def dibujar(self, frame):
-        # Generate the graph layout and draw it using Matplotlib
-        pos = nx.spring_layout(self.Gnx)
-        plt.figure(figsize=(150, 130))
-        nx.draw(self.Gnx, pos, with_labels=True, node_size=700, font_size=10)
-        edge_labels = nx.get_edge_attributes(self.Gnx, 'weight')
-        nx.draw_networkx_edge_labels(self.Gnx, pos, edge_labels=edge_labels)
 
-        # Save the plot to a BytesIO object
-        buf = BytesIO()
-        plt.savefig(buf, format='PNG')
-        buf.seek(0)
-        plt.close()
+        # Add destination nodes and reconstruct shortest paths
+        for destino in usuarios_destino:
+            if destino.id in self.label2v:
+                destino_idx = self.label2v[destino.id]
+                if costo[destino_idx] < math.inf:
+                    # Reconstruct the path from destino_idx to usuario_inicio
+                    path = []
+                    actual = destino_idx
+                    while actual is not None:
+                        path.append(actual)
+                        actual = camino[actual]
+                    path.reverse()
 
-        # Load the image with QPixmap directly from BytesIO
-        pixmap = QPixmap()
-        pixmap.loadFromData(buf.getvalue())
+                    # Add nodes and edges to the subgraph based on the reconstructed path
+                    for i in range(len(path) - 1):
+                        nodo_actual = self.Vertices[path[i]].id
+                        nodo_siguiente = self.Vertices[path[i + 1]].id
+                        peso_arista = costo[path[i + 1]] - costo[path[i]]
+                        if nodo_actual not in subgrafo.label2v:
+                            subgrafo.nodo(nodo_actual, self.Vertices[path[i]])
+                        if nodo_siguiente not in subgrafo.label2v:
+                            subgrafo.nodo(nodo_siguiente, self.Vertices[path[i + 1]])
+                        subgrafo.arista(nodo_actual, nodo_siguiente, peso_arista)
 
-        # Create a QGraphicsScene and add the image
-        escena = QGraphicsScene()
-        vista = QGraphicsView(escena, frame)
-        vista.setGeometry(frame.rect())
-        vista.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
-        vista.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        return usuarios_destino, subgrafo
 
-        item = QGraphicsPixmapItem(pixmap)
-        escena.addItem(item)
-        vista.show()
 
-#funcion para crear un grafo a partir del archivo json
+
+    # Función para crear un grafo a partir del archivo JSON
 def cargar_usuarios_desde_archivo(filename):
     with open(filename, 'r', encoding='utf-8') as file:
         json_data = json.load(file)
