@@ -31,7 +31,7 @@ class Usuario:
         return {
             'id': self.id,
             'nombre': self.nombre,
-            'amigos': [amigo.to_dict() for amigo in self.amigos],
+            'amigos': self.amigos,
             'contrasenia': self.contrasenia,
             'comida_favorita': self.comida_favorita,
             'pelicula_favorita': self.pelicula_favorita,
@@ -49,23 +49,36 @@ class Usuario:
     def getNombre(self):
         return self.nombre
     
-    
-    def eliminar_solicitud_amistad(self, id, nombre_usuario, resultado_cuestionario, valor_relacion, filename):
+    def agregar_solicitud_amistad(self, id, nombre_usuario, resultado_cuestionario, filename):
         solicitud = {
             'id': int(id),
             'nombre_usuario': str(nombre_usuario),
             'resultado_cuestionario': int(resultado_cuestionario)
         }
+        self.solicitudes_amistad.append(solicitud)
+        self.actualizar_solicitudes_amistad_json(filename)
+    
+    def eliminar_solicitud_amistad(self, id, nombre_usuario=None, resultado_cuestionario=None, valor_relacion=None, filename=None):
+        if resultado_cuestionario != None:
+            solicitud = {
+                'id': int(id),
+                'nombre_usuario': str(nombre_usuario),
+                'resultado_cuestionario': int(resultado_cuestionario)
+            }
         amigo = {
             "id": id,
             "relacion": valor_relacion,
         }
-        if solicitud == self.solicitudes_amistad[0]:
-            print('SI IGUALITOS')
-        self.solicitudes_amistad.remove(solicitud)
-        self.actualizar_solicitudes_amistad_json(filename)
-        self.amigos.append(amigo)
-        self.actualizar_amigos_json(filename)
+        for soli in self.solicitudes_amistad:
+            if solicitud == soli:
+                self.solicitudes_amistad.remove(solicitud)
+                self.actualizar_solicitudes_amistad_json(filename)
+                self.amigos.append(amigo)
+                self.actualizar_amigos_json(filename)
+        if resultado_cuestionario == None: #sirve para agregar al usuario logueado como amigo del usuario que envio la solicitud 
+            self.amigos.append(amigo)
+            self.actualizar_amigos_json(filename)
+
 
 
     def actualizar_amigos_json(self, filename): #actualizar amigos
@@ -102,4 +115,4 @@ def agregar_usuario_a_json(usuario, filename):
         # Volver al inicio del archivo y escribir los datos actualizados
         file.seek(0)
         json.dump(json_data, file, ensure_ascii=False, indent=4)
-        file.truncate()
+        file.truncate()
