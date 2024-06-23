@@ -1,4 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
+from graphClass import Graph
+from usuarioClass import Usuario
+
 class Ui_amigos_potenciales(object):
     def setupUi(self, amigos_potenciales):
         amigos_potenciales.setObjectName("Amigos potenciales")
@@ -28,9 +31,9 @@ class Ui_amigos_potenciales(object):
         self.comboBox.setObjectName("comboBox")
 
         items = [
-            "Nombre", "Comida favorita", "Pelicula favorita", "Lugar favorito",
-            "Hobby", "Fobia", "Carrera", "Numero de hermanos", "Ciclo de estudios",
-            "Donde vive", "Tiene novia"
+            "nombre", "comida_favorita", "pelicula_favorita", "lugar_favorito",
+            "hobby", "fobia", "carrera", "numero_hermanos", "ciclo",
+            "donde_vive", "tiene_novia"
         ]
         self.comboBox.addItems(items)
 
@@ -63,13 +66,29 @@ class Ui_amigos_potenciales(object):
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
 
+        #atributos funcionales
+        self.usuarioLogueado = Usuario( 101,"Juan Pérez",["Ana", "Luis", "Carlos"],"password123","Pizza", "Inception","Playa","Leer","Alturas","Ingeniería en Sistemas",2,5,"Ciudad de México","Si",[])
+        self.graphUsuarios = Graph()
+
         self.retranslateUi(amigos_potenciales)
         QtCore.QMetaObject.connectSlotsByName(amigos_potenciales)
 
         #Asignacion de funciones a los botones
         self.btnExit.clicked.connect(self.cerrar_ventana)
+        self.btnBuscar.clicked.connect(self.visualizar_grafo_amigos_potenciales)
 
+    def setGraphUsuarios(self, graph):
+        self.graphUsuarios = graph
 
+    def setUsuarioLogueado(self, usuario):
+        self.usuarioLogueado = usuario
+    
+    def visualizar_grafo_amigos_potenciales(self):   
+        #usuarios_destino servira para colorearlo diferente
+        usuarios_destino, grafo_amigos_potenciales = self.graphUsuarios.camino_minimo_Dijkstra(self.usuarioLogueado, self.comboBox.currentText(), self.inputFiltro.text())
+        grafo_amigos_potenciales.dibujar(self.frame, self.usuarioLogueado.nombre, usuarios_destino)
+        #todavia no funciona
+        
     def retranslateUi(self, amigos_potenciales):
         _translate = QtCore.QCoreApplication.translate
         amigos_potenciales.setWindowTitle(_translate("amigos_potenciales", "Amigos potenciales"))
