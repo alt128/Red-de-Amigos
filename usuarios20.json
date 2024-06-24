@@ -1,0 +1,794 @@
+{
+    "usuarios": [
+        {
+            "id": 1,
+            "nombre": "Maria Ramos",
+            "amigos": [
+                {
+                    "id": 13,
+                    "relacion": 8
+                },
+                {
+                    "id": 7,
+                    "relacion": 8
+                }
+            ],
+            "contrasenia": "B(Bj[hN/i3",
+            "comida_favorita": "Mariscos",
+            "pelicula_favorita": "Harry Potter",
+            "lugar_favorito": "Playa",
+            "hobby": "Musica",
+            "fobia": "Agujas",
+            "carrera": "Derecho",
+            "numero_hermanos": 1,
+            "ciclo": "Octavo ciclo",
+            "donde_vive": "Suburbio",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": []
+        },
+        {
+            "id": 2,
+            "nombre": "Diego Castro",
+            "amigos": [
+                {
+                    "id": 8,
+                    "relacion": 1
+                },
+                {
+                    "id": 14,
+                    "relacion": 10
+                }
+            ],
+            "contrasenia": "D5#eB/*U>y",
+            "comida_favorita": "Mariscos",
+            "pelicula_favorita": "Jurassic Park",
+            "lugar_favorito": "Desierto",
+            "hobby": "Musica",
+            "fobia": "Agujas",
+            "carrera": "Medicina",
+            "numero_hermanos": 5,
+            "ciclo": "Primer ciclo",
+            "donde_vive": "Campo",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": [
+                {
+                    "id": 13,
+                    "nombre_usuario": "Manuel Perez",
+                    "resultado_cuestionario": 8
+                },
+                {
+                    "id": 7,
+                    "nombre_usuario": "David Iglesias",
+                    "resultado_cuestionario": 7
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "nombre": "Sofia Sanchez",
+            "amigos": [
+                {
+                    "id": 14,
+                    "relacion": 1
+                },
+                {
+                    "id": 11,
+                    "relacion": 1
+                },
+                {
+                    "id": 12,
+                    "relacion": 1
+                },
+                {
+                    "id": 14,
+                    "relacion": 4
+                },
+                {
+                    "id": 18,
+                    "relacion": 6
+                }
+            ],
+            "contrasenia": "/`Rcq2`$u0",
+            "comida_favorita": "Sandwich",
+            "pelicula_favorita": "Matrix",
+            "lugar_favorito": "Parque",
+            "hobby": "Deportes",
+            "fobia": "Volar",
+            "carrera": "Arquitectura",
+            "numero_hermanos": 2,
+            "ciclo": "Sexto ciclo",
+            "donde_vive": "Pueblo",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": [
+                {
+                    "id": 15,
+                    "nombre_usuario": "Carmen Vazquez",
+                    "resultado_cuestionario": 2
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "nombre": "Marta Alvarez",
+            "amigos": [
+                {
+                    "id": 16,
+                    "relacion": 9
+                },
+                {
+                    "id": 15,
+                    "relacion": 4
+                }
+            ],
+            "contrasenia": "#Pb3,ueX,8",
+            "comida_favorita": "Hamburguesa",
+            "pelicula_favorita": "Forrest Gump",
+            "lugar_favorito": "Parque",
+            "hobby": "Jardineria",
+            "fobia": "Perros",
+            "carrera": "Medicina",
+            "numero_hermanos": 0,
+            "ciclo": "Noveno ciclo",
+            "donde_vive": "Suburbio",
+            "tiene_novia": "No",
+            "solicitudes_amistad": [
+                {
+                    "id": 9,
+                    "nombre_usuario": "Marta Dominguez",
+                    "resultado_cuestionario": 6
+                },
+                {
+                    "id": 13,
+                    "nombre_usuario": "Manuel Perez",
+                    "resultado_cuestionario": 1
+                },
+                {
+                    "id": 11,
+                    "nombre_usuario": "Manuel Navarro",
+                    "resultado_cuestionario": 5
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "nombre": "Marta Garcia",
+            "amigos": [
+                {
+                    "id": 15,
+                    "relacion": 2
+                },
+                {
+                    "id": 13,
+                    "relacion": 7
+                },
+                {
+                    "id": 6,
+                    "relacion": 8
+                }
+            ],
+            "contrasenia": "_}\".6mF'n2",
+            "comida_favorita": "Tacos",
+            "pelicula_favorita": "Forrest Gump",
+            "lugar_favorito": "Desierto",
+            "hobby": "Viajar",
+            "fobia": "Agujas",
+            "carrera": "Medicina",
+            "numero_hermanos": 0,
+            "ciclo": "Quinto ciclo",
+            "donde_vive": "Suburbio",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": [
+                {
+                    "id": 6,
+                    "nombre_usuario": "Javier Martinez",
+                    "resultado_cuestionario": 9
+                },
+                {
+                    "id": 7,
+                    "nombre_usuario": "David Iglesias",
+                    "resultado_cuestionario": 5
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "nombre": "Javier Martinez",
+            "amigos": [
+                {
+                    "id": 14,
+                    "relacion": 6
+                },
+                {
+                    "id": 5,
+                    "relacion": 8
+                },
+                {
+                    "id": 9,
+                    "relacion": 5
+                },
+                {
+                    "id": 12,
+                    "relacion": 9
+                }
+            ],
+            "contrasenia": "T'm\\wo?K~M",
+            "comida_favorita": "Parrillada",
+            "pelicula_favorita": "Jurassic Park",
+            "lugar_favorito": "Pueblo",
+            "hobby": "Jardineria",
+            "fobia": "Serpientes",
+            "carrera": "Psicologia",
+            "numero_hermanos": 4,
+            "ciclo": "Tercer ciclo",
+            "donde_vive": "Interior",
+            "tiene_novia": "No",
+            "solicitudes_amistad": [
+                {
+                    "id": 15,
+                    "nombre_usuario": "Carmen Vazquez",
+                    "resultado_cuestionario": 3
+                },
+                {
+                    "id": 3,
+                    "nombre_usuario": "Sofia Sanchez",
+                    "resultado_cuestionario": 6
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "nombre": "David Iglesias",
+            "amigos": [
+                {
+                    "id": 1,
+                    "relacion": 8
+                },
+                {
+                    "id": 18,
+                    "relacion": 1
+                },
+                {
+                    "id": 16,
+                    "relacion": 4
+                },
+                {
+                    "id": 19,
+                    "relacion": 4
+                }
+            ],
+            "contrasenia": ".P=aSuTMA-",
+            "comida_favorita": "Tacos",
+            "pelicula_favorita": "Jurassic Park",
+            "lugar_favorito": "Lago",
+            "hobby": "Viajar",
+            "fobia": "Oscuridad",
+            "carrera": "Diseno",
+            "numero_hermanos": 1,
+            "ciclo": "Quinto ciclo",
+            "donde_vive": "Montana",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": [
+                {
+                    "id": 1,
+                    "nombre_usuario": "Maria Ramos",
+                    "resultado_cuestionario": 10
+                },
+                {
+                    "id": 10,
+                    "nombre_usuario": "Carmen Dominguez",
+                    "resultado_cuestionario": 10
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "nombre": "Carmen Sanchez",
+            "amigos": [
+                {
+                    "id": 2,
+                    "relacion": 1
+                },
+                {
+                    "id": 14,
+                    "relacion": 7
+                },
+                {
+                    "id": 16,
+                    "relacion": 2
+                }
+            ],
+            "contrasenia": "m{*2g`5jE]",
+            "comida_favorita": "Pizza",
+            "pelicula_favorita": "Forrest Gump",
+            "lugar_favorito": "Desierto",
+            "hobby": "Leer",
+            "fobia": "Perros",
+            "carrera": "Psicologia",
+            "numero_hermanos": 4,
+            "ciclo": "Sexto ciclo",
+            "donde_vive": "Costa",
+            "tiene_novia": "No",
+            "solicitudes_amistad": [
+                {
+                    "id": 16,
+                    "nombre_usuario": "Marta Suarez",
+                    "resultado_cuestionario": 8
+                },
+                {
+                    "id": 18,
+                    "nombre_usuario": "Elena Ortega",
+                    "resultado_cuestionario": 3
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "nombre": "Marta Dominguez",
+            "amigos": [
+                {
+                    "id": 19,
+                    "relacion": 5
+                },
+                {
+                    "id": 6,
+                    "relacion": 5
+                },
+                {
+                    "id": 13,
+                    "relacion": 9
+                },
+                {
+                    "id": 17,
+                    "relacion": 7
+                },
+                {
+                    "id": 18,
+                    "relacion": 10
+                }
+            ],
+            "contrasenia": "8_mnDYRg8+",
+            "comida_favorita": "Sandwich",
+            "pelicula_favorita": "Titanic",
+            "lugar_favorito": "Pueblo",
+            "hobby": "Jardineria",
+            "fobia": "Alturas",
+            "carrera": "Arquitectura",
+            "numero_hermanos": 4,
+            "ciclo": "Segundo ciclo",
+            "donde_vive": "Interior",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": [
+                {
+                    "id": 11,
+                    "nombre_usuario": "Manuel Navarro",
+                    "resultado_cuestionario": 3
+                },
+                {
+                    "id": 8,
+                    "nombre_usuario": "Carmen Sanchez",
+                    "resultado_cuestionario": 6
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "nombre": "Carmen Dominguez",
+            "amigos": [
+                {
+                    "id": 12,
+                    "relacion": 2
+                },
+                {
+                    "id": 18,
+                    "relacion": 7
+                }
+            ],
+            "contrasenia": "Q7ar=Qr]aL",
+            "comida_favorita": "Parrillada",
+            "pelicula_favorita": "Forrest Gump",
+            "lugar_favorito": "Bosque",
+            "hobby": "Viajar",
+            "fobia": "Insectos",
+            "carrera": "Economia",
+            "numero_hermanos": 2,
+            "ciclo": "Septimo ciclo",
+            "donde_vive": "Costa",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": []
+        },
+        {
+            "id": 11,
+            "nombre": "Manuel Navarro",
+            "amigos": [
+                {
+                    "id": 14,
+                    "relacion": 2
+                },
+                {
+                    "id": 3,
+                    "relacion": 1
+                },
+                {
+                    "id": 15,
+                    "relacion": 9
+                }
+            ],
+            "contrasenia": "Q^^:=[\"V6q",
+            "comida_favorita": "Pizza",
+            "pelicula_favorita": "El Senor de los Anillos",
+            "lugar_favorito": "Lago",
+            "hobby": "Videojuegos",
+            "fobia": "Perros",
+            "carrera": "Medicina",
+            "numero_hermanos": 5,
+            "ciclo": "Primer ciclo",
+            "donde_vive": "Otro",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": [
+                {
+                    "id": 7,
+                    "nombre_usuario": "David Iglesias",
+                    "resultado_cuestionario": 4
+                },
+                {
+                    "id": 4,
+                    "nombre_usuario": "Marta Alvarez",
+                    "resultado_cuestionario": 6
+                },
+                {
+                    "id": 7,
+                    "nombre_usuario": "David Iglesias",
+                    "resultado_cuestionario": 1
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "nombre": "Alejandro Lopez",
+            "amigos": [
+                {
+                    "id": 10,
+                    "relacion": 2
+                },
+                {
+                    "id": 3,
+                    "relacion": 1
+                },
+                {
+                    "id": 6,
+                    "relacion": 9
+                }
+            ],
+            "contrasenia": "}?Qbekah'/",
+            "comida_favorita": "Parrillada",
+            "pelicula_favorita": "El Padrino",
+            "lugar_favorito": "Playa",
+            "hobby": "Musica",
+            "fobia": "Perros",
+            "carrera": "Diseno",
+            "numero_hermanos": 0,
+            "ciclo": "Decimo ciclo",
+            "donde_vive": "Otro",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": [
+                {
+                    "id": 10,
+                    "nombre_usuario": "Carmen Dominguez",
+                    "resultado_cuestionario": 9
+                },
+                {
+                    "id": 7,
+                    "nombre_usuario": "David Iglesias",
+                    "resultado_cuestionario": 8
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "nombre": "Manuel Perez",
+            "amigos": [
+                {
+                    "id": 1,
+                    "relacion": 8
+                },
+                {
+                    "id": 5,
+                    "relacion": 7
+                },
+                {
+                    "id": 16,
+                    "relacion": 3
+                },
+                {
+                    "id": 9,
+                    "relacion": 9
+                }
+            ],
+            "contrasenia": "6H@bviT8vu",
+            "comida_favorita": "Ensalada",
+            "pelicula_favorita": "Titanic",
+            "lugar_favorito": "Pueblo",
+            "hobby": "Cocinar",
+            "fobia": "Oscuridad",
+            "carrera": "Administracion",
+            "numero_hermanos": 5,
+            "ciclo": "Primer ciclo",
+            "donde_vive": "Extranjero",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": [
+                {
+                    "id": 2,
+                    "nombre_usuario": "Diego Castro",
+                    "resultado_cuestionario": 10
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "nombre": "Lucia Garcia",
+            "amigos": [
+                {
+                    "id": 2,
+                    "relacion": 10
+                },
+                {
+                    "id": 3,
+                    "relacion": 1
+                },
+                {
+                    "id": 6,
+                    "relacion": 6
+                },
+                {
+                    "id": 8,
+                    "relacion": 7
+                },
+                {
+                    "id": 11,
+                    "relacion": 2
+                },
+                {
+                    "id": 18,
+                    "relacion": 10
+                },
+                {
+                    "id": 3,
+                    "relacion": 4
+                }
+            ],
+            "contrasenia": "R`Yx|&'|![",
+            "comida_favorita": "Mariscos",
+            "pelicula_favorita": "Forrest Gump",
+            "lugar_favorito": "Bosque",
+            "hobby": "Jardineria",
+            "fobia": "Insectos",
+            "carrera": "Derecho",
+            "numero_hermanos": 3,
+            "ciclo": "Septimo ciclo",
+            "donde_vive": "Otro",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": [
+                {
+                    "id": 2,
+                    "nombre_usuario": "Diego Castro",
+                    "resultado_cuestionario": 7
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "nombre": "Carmen Vazquez",
+            "amigos": [
+                {
+                    "id": 5,
+                    "relacion": 2
+                },
+                {
+                    "id": 11,
+                    "relacion": 9
+                },
+                {
+                    "id": 4,
+                    "relacion": 4
+                },
+                {
+                    "id": 17,
+                    "relacion": 3
+                }
+            ],
+            "contrasenia": "~vh%_7ELli",
+            "comida_favorita": "Pizza",
+            "pelicula_favorita": "Avatar",
+            "lugar_favorito": "Montana",
+            "hobby": "Videojuegos",
+            "fobia": "Espacios cerrados",
+            "carrera": "Psicologia",
+            "numero_hermanos": 5,
+            "ciclo": "Decimo ciclo",
+            "donde_vive": "Pueblo",
+            "tiene_novia": "No",
+            "solicitudes_amistad": [
+                {
+                    "id": 7,
+                    "nombre_usuario": "David Iglesias",
+                    "resultado_cuestionario": 1
+                },
+                {
+                    "id": 7,
+                    "nombre_usuario": "David Iglesias",
+                    "resultado_cuestionario": 2
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "nombre": "Marta Suarez",
+            "amigos": [
+                {
+                    "id": 4,
+                    "relacion": 9
+                },
+                {
+                    "id": 7,
+                    "relacion": 4
+                },
+                {
+                    "id": 13,
+                    "relacion": 3
+                },
+                {
+                    "id": 8,
+                    "relacion": 2
+                }
+            ],
+            "contrasenia": "V]Wy(8K`m'",
+            "comida_favorita": "Pizza",
+            "pelicula_favorita": "Avatar",
+            "lugar_favorito": "Ciudad",
+            "hobby": "Bailar",
+            "fobia": "Aranas",
+            "carrera": "Derecho",
+            "numero_hermanos": 3,
+            "ciclo": "Octavo ciclo",
+            "donde_vive": "Otro",
+            "tiene_novia": "No",
+            "solicitudes_amistad": [
+                {
+                    "id": 3,
+                    "nombre_usuario": "Sofia Sanchez",
+                    "resultado_cuestionario": 8
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "nombre": "Carlos Gutierrez",
+            "amigos": [
+                {
+                    "id": 15,
+                    "relacion": 3
+                },
+                {
+                    "id": 9,
+                    "relacion": 7
+                }
+            ],
+            "contrasenia": "!'iMkTyV@Q",
+            "comida_favorita": "Hamburguesa",
+            "pelicula_favorita": "Jurassic Park",
+            "lugar_favorito": "Parque",
+            "hobby": "Videojuegos",
+            "fobia": "Volar",
+            "carrera": "Ingenieria",
+            "numero_hermanos": 5,
+            "ciclo": "Tercer ciclo",
+            "donde_vive": "Interior",
+            "tiene_novia": "No",
+            "solicitudes_amistad": [
+                {
+                    "id": 16,
+                    "nombre_usuario": "Marta Suarez",
+                    "resultado_cuestionario": 6
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "nombre": "Elena Ortega",
+            "amigos": [
+                {
+                    "id": 7,
+                    "relacion": 1
+                },
+                {
+                    "id": 10,
+                    "relacion": 7
+                },
+                {
+                    "id": 14,
+                    "relacion": 10
+                },
+                {
+                    "id": 3,
+                    "relacion": 6
+                },
+                {
+                    "id": 9,
+                    "relacion": 10
+                }
+            ],
+            "contrasenia": "J@]sv}*cOc",
+            "comida_favorita": "Mariscos",
+            "pelicula_favorita": "Jurassic Park",
+            "lugar_favorito": "Parque",
+            "hobby": "Jardineria",
+            "fobia": "Perros",
+            "carrera": "Biologia",
+            "numero_hermanos": 5,
+            "ciclo": "Quinto ciclo",
+            "donde_vive": "Montana",
+            "tiene_novia": "No",
+            "solicitudes_amistad": [
+                {
+                    "id": 17,
+                    "nombre_usuario": "Carlos Gutierrez",
+                    "resultado_cuestionario": 2
+                },
+                {
+                    "id": 17,
+                    "nombre_usuario": "Carlos Gutierrez",
+                    "resultado_cuestionario": 8
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "nombre": "Miguel Perez",
+            "amigos": [
+                {
+                    "id": 9,
+                    "relacion": 5
+                },
+                {
+                    "id": 7,
+                    "relacion": 4
+                }
+            ],
+            "contrasenia": "RJah~!~Lj<",
+            "comida_favorita": "Ensalada",
+            "pelicula_favorita": "El Senor de los Anillos",
+            "lugar_favorito": "Campo",
+            "hobby": "Deportes",
+            "fobia": "Insectos",
+            "carrera": "Biologia",
+            "numero_hermanos": 2,
+            "ciclo": "Primer ciclo",
+            "donde_vive": "Ciudad",
+            "tiene_novia": "No",
+            "solicitudes_amistad": [
+                {
+                    "id": 4,
+                    "nombre_usuario": "Marta Alvarez",
+                    "resultado_cuestionario": 8
+                }
+            ]
+        },
+        {
+            "id": 1501,
+            "nombre": "Elmer",
+            "amigos": [],
+            "contrasenia": "3",
+            "comida_favorita": "ceviche",
+            "pelicula_favorita": "Harry Potter",
+            "lugar_favorito": "Totoraa",
+            "hobby": "pelis",
+            "fobia": "ratones",
+            "carrera": "2",
+            "numero_hermanos": "Ingenieria de software",
+            "ciclo": "Cuarto ciclo",
+            "donde_vive": "Totora",
+            "tiene_novia": "Si",
+            "solicitudes_amistad": []
+        }
+    ]
+}
