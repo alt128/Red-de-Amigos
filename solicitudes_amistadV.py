@@ -87,7 +87,7 @@ class Ui_solicitudes_amistad(object):
             for solicitud in self.usuarioLogueado.solicitudes_amistad:
                 nombre_usuario = solicitud["nombre_usuario"]
                 resultado_cuestionario = solicitud["resultado_cuestionario"]
-                self.add_request_frame(self.layout, nombre_usuario, resultado_cuestionario)
+                self.aniadir_frame_requerido(self.layout, nombre_usuario, resultado_cuestionario)
     
     def aceptar_solicitud_amistad(self, nombre, resultado_cuestionario): #asociada al boton Aceptar solicitud
         window = Ui_cuestionario_relacionV()
@@ -110,7 +110,7 @@ class Ui_solicitudes_amistad(object):
         self.lblNombre.setText(_translate("solicitudes_amistad", "¿Quiénes te seleccionaron como amigo?"))
         self.titulo.setText(_translate("solicitudes_amistad", "SOLICITUDES DE AMISTAD"))
 
-    def add_request_frame(self, layout, nombre_usuario, resultado_cuestionario):
+    def aniadir_frame_requerido(self, layout, nombre_usuario, resultado_cuestionario):
         frame = QtWidgets.QFrame()
         frame.setStyleSheet("background-color: rgb(10, 125, 208);" "background-color: rgb(7, 84, 140);" "background-color: rgb(9, 118, 195);")
         frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -136,6 +136,6 @@ class Ui_solicitudes_amistad(object):
         self.close()
 
 class Ui_solicitudes_amistadV(QtWidgets.QDialog, Ui_solicitudes_amistad):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.setupUi(self)

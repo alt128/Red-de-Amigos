@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from crear_cuentaV import Ui_crear_cuenta
 from menu_opcionesV import Ui_menu_opcionesV
 from graphClass import Graph, cargar_usuarios_desde_archivo
+from usuarioClass import Usuario
 
 class Ui_inicio_sesion(object):
     def setupUi(self, inicio_sesion):
@@ -69,7 +70,6 @@ class Ui_inicio_sesion(object):
 
         #clases asociadas a inicio_sesionV
         self.graphUsuarios = Graph()
-        self.graphUsuarios = cargar_usuarios_desde_archivo('usuarios.json') #Entidad de la clase grafo que entidades de usuarios como nodos
 
         #Asignacion de funciones a los botones
         self.btnLogin.clicked.connect(self.iniciar_sesion)
@@ -86,15 +86,20 @@ class Ui_inicio_sesion(object):
 
         
     def iniciar_sesion(self): #comando de btnLogin
+        self.graphUsuarios = cargar_usuarios_desde_archivo('usuarios.json')
+        
         nombre = self.inputUser.text()
         contrasenia = self.inputPassword.text()
         # Lógica de validación
-        if self.graphUsuarios.buscar_usuario_bfs(nombre, contrasenia) == True or nombre == '1':
+        usuario = self.graphUsuarios.buscar_usuario_bfs(nombre, contrasenia)
+        if isinstance(usuario, Usuario) or nombre == '1':
             QtWidgets.QMessageBox.information(self, "Login", "Inicio de sesión exitoso")
             self.setEnabled(True)
             window = Ui_menu_opcionesV()
+            window.setUsuarioLogueado(usuario)
+            window.setGraphUsuarios(self.graphUsuarios) #pasa el grafo de usuarios a Menu de opciones
+            window.generar_grafo_amigos()
             window.exec()
-
         else: 
             QtWidgets.QMessageBox.warning(self, "Login", "Nombre de usuario o contraseña incorrectos")
 

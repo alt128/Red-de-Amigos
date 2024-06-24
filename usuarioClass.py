@@ -2,7 +2,7 @@ import json
 from amigoClass import Amigo
 
 class Usuario:
-    def _init_(self, id, nombre, amigos, contrasenia, comida_favorita, pelicula_favorita, lugar_favorito, hobby, fobia, carrera, numero_hermanos, ciclo, donde_vive, tiene_novia,solicitudes_amistad):
+    def __init__(self, id, nombre, amigos, contrasenia, comida_favorita, pelicula_favorita, lugar_favorito, hobby, fobia, carrera, numero_hermanos, ciclo, donde_vive, tiene_novia,solicitudes_amistad):
         self.id = id
         self.nombre = nombre
         self.amigos = amigos
@@ -19,7 +19,7 @@ class Usuario:
         self.tiene_novia = tiene_novia
         self.solicitudes_amistad = solicitudes_amistad
 
-    def _repr_(self):
+    def __repr__(self):
         return (f"Usuario(id={self.id}, nombre='{self.nombre}', amigos={self.amigos}, "
                 f"contrasenia='{self.contrasenia}', comida_favorita='{self.comida_favorita}', "
                 f"pelicula_favorita='{self.pelicula_favorita}', lugar_favorito='{self.lugar_favorito}', "
@@ -105,14 +105,12 @@ class Usuario:
     
 def agregar_usuario_a_json(usuario, filename):
     with open(filename, 'r+', encoding='utf-8') as file:
-        # Cargar los datos existentes
         json_data = json.load(file)
         
-        # Convertir el usuario a un diccionario y agregarlo a la lista de usuarios
+        #usuario a un diccionario
         nuevo_usuario = usuario.to_dict()
         json_data['usuarios'].append(nuevo_usuario)
         
-        # Volver al inicio del archivo y escribir los datos actualizados
         file.seek(0)
         json.dump(json_data, file, ensure_ascii=False, indent=4)
         file.truncate()

@@ -126,6 +126,6 @@ class Ui_agregar_amigos(object):
         self.close()
 
 class Ui_agregar_amigosV(QtWidgets.QDialog, Ui_agregar_amigos):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.setupUi(self)

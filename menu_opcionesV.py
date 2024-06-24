@@ -88,24 +88,15 @@ class Ui_menu_opciones(object):
 
     def getNombreUsuarioLogueado(self):
         return self.usuarioLogueado.getNombre()
-    
+
     def generar_grafo_amigos(self):
-        self.graphUsuarios.dibujar(self.frame)
+        self.graphUsuarios.dibujar(self.frame,self.usuarioLogueado.nombre)
         
-        #grafo_amigos = Graph()
-        # Agregar el usuario logueado al grafo
-        #grafo_amigos.nodo(str(self.usuarioLogueado.nombre), str(self.usuarioLogueado.nombre))
-
-        # Agregar los amigos del usuario logueado al grafo
-        #for amigo in self.usuarioLogueado.amigos:
-            #grafo_amigos.nodo(str(amigo.id), str(amigo.id))
-            # Agregar la arista entre el usuario logueado y el amigo
-            #grafo_amigos.aniadir_arista(str(self.usuarioLogueado.nombre), str(amigo.id), str(amigo.relacion))  # Asumiendo peso 1 para todas las aristas
-
-        #grafo_amigos.dibujar(self.frame)
         
     def amigos_potenciales(self):
         window = Ui_amigos_potencialesV()
+        window.setGraphUsuarios(self.graphUsuarios)
+        window.setUsuarioLogueado(self.usuarioLogueado)
         window.exec()
         print("Amigos potenciales clickeado")
 
@@ -115,11 +106,16 @@ class Ui_menu_opciones(object):
 
     def agregar_amigos(self):
         window = Ui_agregar_amigosV()
+        window.setUsuarioLogueado(self.usuarioLogueado)
+        window.setGraphUsuarios(self.graphUsuarios)
         window.exec()
         print("Agregar amigos clickeado")
 
     def solicitudes_amistad(self):
         window = Ui_solicitudes_amistadV()
+        window.setUsuarioLogueado(self.usuarioLogueado)
+        window.setGraphUsuarios(self.graphUsuarios)
+        window.mostrar_solicitudes_amistad()
         window.exec()
         print("Solicitudes de amistad clickeado")
 
@@ -134,6 +130,6 @@ class Ui_menu_opciones(object):
         self.lblGrafoAmigos.setText(_translate("menu_opciones", "Grafo de amigos"))
 
 class Ui_menu_opcionesV(QtWidgets.QDialog, Ui_menu_opciones):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.setupUi(self)

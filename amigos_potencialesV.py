@@ -84,10 +84,9 @@ class Ui_amigos_potenciales(object):
         self.usuarioLogueado = usuario
     
     def visualizar_grafo_amigos_potenciales(self):   
-        #usuarios_destino servira para colorearlo diferente
+        #usuarios_destino servira para colorearlos diferente (de naranja)
         usuarios_destino, grafo_amigos_potenciales = self.graphUsuarios.camino_minimo_Dijkstra(self.usuarioLogueado, self.comboBox.currentText(), self.inputFiltro.text())
         grafo_amigos_potenciales.dibujar(self.frame, self.usuarioLogueado.nombre, usuarios_destino)
-        #todavia no funciona
         
     def retranslateUi(self, amigos_potenciales):
         _translate = QtCore.QCoreApplication.translate

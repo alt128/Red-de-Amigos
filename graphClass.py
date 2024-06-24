@@ -35,7 +35,7 @@ class Graph:
         n = len(self.G)
         visited = [False] * n
         queue = []
-        for i, usuario in enumerate(self.Vertices):
+        for i, usuario in enumerate(self.Vertices): #nodo para iniciar busqueda
             if isinstance(usuario, Usuario):
                 queue.append(i)
                 visited[i] = True

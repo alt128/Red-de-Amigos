@@ -223,17 +223,15 @@ class Ui_crear_cuenta(QtWidgets.QDialog):
         tienes_novia = self.comboBox.currentText()
         ciclo = self.inputCiclo.text()
         ciudad_domicilio = self.inputCiudadDomicilio.text()
-        # Valida que ninguno de los campos esté vacío
+        # Valida que ninguno de los campos este vacio
         if not all([nombre, contrasenia, comida_favorita, pelicula_favorita, lugar_favorito, hobby, fobia, carrera, num_hermanos, tienes_novia, ciclo, ciudad_domicilio]):
             QtWidgets.QMessageBox.warning(self, "Advertencia", "Todos los campos deben estar llenos")
             return
         
-        amigos = []
-        # Crea nuevo usuario
         nuevo_usuario = Usuario(
             self.idMayor + 1,
             nombre,
-            amigos,
+            [],
             contrasenia,
             comida_favorita,
             pelicula_favorita,
@@ -244,7 +242,8 @@ class Ui_crear_cuenta(QtWidgets.QDialog):
             carrera,
             ciclo,
             ciudad_domicilio,
-            tienes_novia
+            tienes_novia,
+            []
         )
         # Añadir usuario al archivo JSON
         agregar_usuario_a_json(nuevo_usuario, 'usuarios.json')
@@ -258,7 +257,7 @@ class Ui_crear_cuenta(QtWidgets.QDialog):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Formulario de Registro"))
+        Dialog.setWindowTitle(_translate("Dialog", "Crear cuenta"))
         self.btnExit.setText(_translate("Dialog", "<-"))
         self.titulo.setText(_translate("Dialog", "FORMULARIO DE REGISTRO"))
         self.lblNombre.setText(_translate("Dialog", "Nombre:"))

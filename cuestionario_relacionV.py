@@ -191,13 +191,13 @@ class Ui_cuestionario_relacion(object):
         nombre = "¿Qué tanto sabes de " + self.usuarioAmigo.nombre + "?"
         self.titulo.setText(_translate("cuestionario_relacion", nombre ))
 
-        # Obtén valores aleatorios y mezcla el valor real del usuarioAmigo
+        #Obtén valores aleatorios y mezcla el valor real del usuarioAmigo para disposicion random cada que se acitva la el cuestionario_relacion
         def obtenerItems(lista, valorReal):
-            items = random.sample(lista, 4)  # Obtener 4 items aleatorios
-            while valorReal in items:  # Asegurarse de que el valor real no esté en los aleatorios
+            items = random.sample(lista, 4)
+            while valorReal in items:  #valor real no esté en los aleatorios
                 items = random.sample(lista, 4)
             items.append(valorReal)
-            random.shuffle(items)  # Mezclar los items para que el valor real no esté siempre en la misma posición
+            random.shuffle(items) 
             return items
 
         # Asignar los items a los ComboBoxes
@@ -210,7 +210,7 @@ class Ui_cuestionario_relacion(object):
         self.cbCiudadDomicilio.addItems(obtenerItems(vive, self.usuarioAmigo.donde_vive))
 
     def resultadoCuestionario(self):
-        resultado_cuestionario = 0
+        resultado_cuestionario = 10
 
         hobby = self.cbHobby.currentText()
         fobia = self.cbFobia.currentText()
@@ -223,16 +223,16 @@ class Ui_cuestionario_relacion(object):
         ciclo = self.cbCiclo.currentText()
         carrera = self.cbCarrera.currentText()
 
-        if hobby == self.usuarioAmigo.hobby: resultado_cuestionario = resultado_cuestionario+1
-        if fobia == self.usuarioAmigo.fobia: resultado_cuestionario = resultado_cuestionario+1
-        if comida_favorita == self.usuarioAmigo.comida_favorita: resultado_cuestionario = resultado_cuestionario+1
-        if num_hermanos == self.usuarioAmigo.numero_hermanos: resultado_cuestionario = resultado_cuestionario+1
-        if pelicula_favorita == self.usuarioAmigo.pelicula_favorita: resultado_cuestionario = resultado_cuestionario+1
-        if ciudad_domicilio == self.usuarioAmigo.donde_vive: resultado_cuestionario = resultado_cuestionario+1
-        if lugar_favorito == self.usuarioAmigo.lugar_favorito: resultado_cuestionario = resultado_cuestionario+1
-        if tiene_novia == self.usuarioAmigo.tiene_novia: resultado_cuestionario = resultado_cuestionario+1
-        if ciclo == self.usuarioAmigo.ciclo: resultado_cuestionario = resultado_cuestionario+1
-        if carrera == self.usuarioAmigo.carrera: resultado_cuestionario = resultado_cuestionario+1
+        if hobby == self.usuarioAmigo.hobby: resultado_cuestionario = resultado_cuestionario-1
+        if fobia == self.usuarioAmigo.fobia: resultado_cuestionario = resultado_cuestionario-1
+        if comida_favorita == self.usuarioAmigo.comida_favorita: resultado_cuestionario = resultado_cuestionario-1
+        if num_hermanos == self.usuarioAmigo.numero_hermanos: resultado_cuestionario = resultado_cuestionario-1
+        if pelicula_favorita == self.usuarioAmigo.pelicula_favorita: resultado_cuestionario = resultado_cuestionario-1
+        if ciudad_domicilio == self.usuarioAmigo.donde_vive: resultado_cuestionario = resultado_cuestionario-1
+        if lugar_favorito == self.usuarioAmigo.lugar_favorito: resultado_cuestionario = resultado_cuestionario-1
+        if tiene_novia == self.usuarioAmigo.tiene_novia: resultado_cuestionario = resultado_cuestionario-1
+        if ciclo == self.usuarioAmigo.ciclo: resultado_cuestionario = resultado_cuestionario-1
+        if carrera == self.usuarioAmigo.carrera: resultado_cuestionario = resultado_cuestionario-1
 
         return resultado_cuestionario
 
@@ -247,7 +247,9 @@ class Ui_cuestionario_relacion(object):
         resultado_cuestionario_usuario_actual = self.resultadoCuestionario()
 
         valor_relacion = int((resultado_cuestionario_usuario_actual+self.resultadoCuestionarioUsuarioSolicitoAmistad)/2)
+        #se indexan como amigos en ambos usuuarios
         self.usuarioLogueado.eliminar_solicitud_amistad(self.usuarioAmigo.id, self.usuarioAmigo.nombre, self.resultadoCuestionarioUsuarioSolicitoAmistad, valor_relacion, 'usuarios.json')
+        self.usuarioAmigo.eliminar_solicitud_amistad(self.usuarioLogueado.id, self.usuarioLogueado.nombre, None, valor_relacion, 'usuarios.json')
         QtWidgets.QMessageBox.information(self, "Cuestionario terminado", f"{self.usuarioAmigo.nombre} es tu amigo, y su relacion es de {valor_relacion} puntos")
         self.close()
 
@@ -274,11 +276,11 @@ class Ui_cuestionario_relacion(object):
         self.close()
 
 class Ui_cuestionario_relacionV(QtWidgets.QDialog, Ui_cuestionario_relacion):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.setupUi(self)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     window = Ui_cuestionario_relacionV()
     window.show()
